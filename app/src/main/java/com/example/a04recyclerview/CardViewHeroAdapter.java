@@ -20,11 +20,9 @@ import java.util.ArrayList;
 public class CardViewHeroAdapter extends RecyclerView.Adapter<CardViewHeroAdapter.CardViewViewHolder> {
     private ArrayList<Hero> listHero;
 
-    public CardViewHeroAdapter(ArrayList<Hero> listHero) {
-        this.listHero = listHero;
+    public CardViewHeroAdapter(ArrayList<Hero> list) {
+        this.listHero = list;
     }
-
-
 
     @NonNull
     @Override
@@ -35,14 +33,15 @@ public class CardViewHeroAdapter extends RecyclerView.Adapter<CardViewHeroAdapte
 
     @Override
     public void onBindViewHolder(@NonNull CardViewViewHolder holder, int position) {
-        Hero hero = new Hero();
+
+        Hero hero = listHero.get(position);
 
         Glide.with(holder.itemView.getContext())
                 .load(hero.getPhoto())
                 .apply(new RequestOptions().override(350,550))
                 .into(holder.imgPhoto);
 
-        holder.tvname.setText(hero.getName());
+        holder.tvName.setText(hero.getName());
         holder.tvDetail.setText(hero.getDetail());
 
 
@@ -63,6 +62,14 @@ public class CardViewHeroAdapter extends RecyclerView.Adapter<CardViewHeroAdapte
             }
         });
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(holder.itemView.getContext(),"Kamu Memilih " +
+                        listHero.get(holder.getAdapterPosition()).getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
     }
 
@@ -73,18 +80,18 @@ public class CardViewHeroAdapter extends RecyclerView.Adapter<CardViewHeroAdapte
         return listHero.size();
     }
 
-    class CardViewViewHolder extends RecyclerView.ViewHolder{
+    class CardViewViewHolder extends RecyclerView.ViewHolder {
         ImageView imgPhoto;
-        TextView tvname, tvDetail;
+        TextView tvName, tvDetail;
         Button btnFavorite, btnShare;
 
         CardViewViewHolder(View itemView) {
             super(itemView);
             imgPhoto = itemView.findViewById(R.id.img_item_photo);
-            tvname = itemView.findViewById(R.id.tv_item_name);
+            tvName = itemView.findViewById(R.id.tv_item_name);
             tvDetail = itemView.findViewById(R.id.tv_item_detail);
             btnFavorite = itemView.findViewById(R.id.btn_set_favorite);
-            btnFavorite = itemView.findViewById(R.id.btn_set_share);
+            btnShare = itemView.findViewById(R.id.btn_set_share);
 
 
         }
