@@ -55,5 +55,6 @@ public class HeroesData {
         }
 
         return list;
+
     }
 }

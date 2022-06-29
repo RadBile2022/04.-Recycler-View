@@ -33,6 +33,7 @@ public class GridHeroAdapter extends RecyclerView.Adapter<GridHeroAdapter.GridVi
     public GridViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_grid_hero, parent,false);
         return new GridViewHolder(view);
+
     }
 
     @Override
